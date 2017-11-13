@@ -33,3 +33,30 @@ window.addEventListener('beforeinstallprompt', function(event) {
     //     }
     // });
 });
+
+var promise = new Promise(function(resolve, reject) {
+    setTimeout(function() {
+        // resolve('This is executed after the timer is done');
+        reject({code: 500, message: "An error occured!"});
+    },3000);
+});
+
+promise
+    .then(function(text) {
+        console.log(text);
+        return text;
+    }
+    // , function(err) {
+    //     console.log('the first error');
+    //     console.log(err);
+    // }
+    )
+    .then(function(newText) {
+        console.log(newText);
+    })
+    .catch(function(err) {
+        console.log('the second error');
+        console.log(err);
+    });
+
+console.log('This is executed right after setTimeout');
