@@ -4,6 +4,28 @@ var closeCreatePostModalButton = document.querySelector('#close-create-post-moda
 
 function openCreatePostModal() {
   createPostArea.style.display = 'block';
+
+  if (deferredPrompt) {
+    // alert('ada deferredPrompt');
+    console.log(deferredPrompt);
+    deferredPrompt.prompt();
+
+    deferredPrompt.userChoice
+                  .then(function(choiceResult) {
+                    console.log(choiceResult.outcome);
+                    // alert(choiceResult.outcome);
+
+                    if(choiceResult.outcome == 'dismissed') {
+                      console.log('User cancelled home screen install');
+                    } else {
+                      console.log('User added to home screen');
+                    }
+                  });
+    
+  } else {
+    // alert('no deferredPrompt');
+  }
+  deferredPrompt = null;
 }
 
 function closeCreatePostModal() {
