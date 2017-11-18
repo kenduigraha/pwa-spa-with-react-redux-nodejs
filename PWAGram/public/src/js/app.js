@@ -1,5 +1,9 @@
 var deferredPrompt;
 
+if (!window.Promise) {
+    window.Promise = Promise;
+  }
+
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker
              .register('/sw.js')
@@ -36,8 +40,8 @@ window.addEventListener('beforeinstallprompt', function(event) {
 
 var promise = new Promise(function(resolve, reject) {
     setTimeout(function() {
-        // resolve('This is executed after the timer is done');
-        reject({code: 500, message: "An error occured!"});
+        resolve('This is executed after the timer is done');
+        // reject({code: 500, message: "An error occured!"});
     },3000);
 });
 
